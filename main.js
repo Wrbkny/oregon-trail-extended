@@ -10,13 +10,59 @@ class Traveler {
     }
     eat() {
         if (this.food <= 0) {
-            return this.ishealthy = false
+            return this.isHealthy = false
         }
 
         this.food -= 1
     }
 
 }
+
+class Doctor extends Traveler {
+    constructor(name,) {
+        super(name,)
+    
+    }
+    heal(traveler) {
+      traveler.isHealthy = true
+    }
+
+  }
+
+
+
+class Hunter extends Traveler {
+
+    constructor(name) {
+        super(name)
+        this.name = name
+        this.food = 2
+
+    }
+    hunt() {
+        this.food += 5
+    }
+
+    eat() {
+        if (this.food < 2) {
+            this.food -= this.food
+            return this.isHealthy = false
+        }
+        this.food -= 2
+
+    }
+
+    giveFood(traveler, numOfFoodUnits) {
+        if (this.food >= numOfFoodUnits) {
+            traveler.food += numOfFoodUnits
+            this.food -= numOfFoodUnits
+
+        }
+
+    }
+}
+
+
 
 class Wagon {
     constructor(capacity) {
@@ -34,12 +80,10 @@ class Wagon {
     }
 
     shouldQuarantine() {
-        for (let index = 0; index < this.passengers.length; index++) {
-            if (this.passengers[index].isHealthy === false) {
-                return true
-            }
-
-        }
+        console.log(this.passengers)
+        const healthy = this.passengers.some(person => person.isHealthy === false)
+        return healthy 
+        
 
     }
     totalFood() {
